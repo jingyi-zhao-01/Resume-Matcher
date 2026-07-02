@@ -43,8 +43,8 @@ describe('ResumeViewerPage — delete from the processing-failed error state', (
     mockedFetchResume.mockResolvedValue({
       title: 'Broken Resume',
       raw_resume: { processing_status: 'failed' },
-    } as never);
-    mockedDeleteResume.mockResolvedValue({ message: 'deleted' } as never);
+    } as Awaited<ReturnType<typeof fetchResume>>);
+    mockedDeleteResume.mockResolvedValue(undefined);
 
     render(<ResumeViewerPage />);
 

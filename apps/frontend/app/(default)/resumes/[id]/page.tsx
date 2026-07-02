@@ -213,10 +213,11 @@ export default function ResumeViewerPage() {
     setShowDownloadSuccessDialog(false);
   };
 
-  // Delete-related dialogs are rendered in every return branch (including the
-  // loading/error early returns) so the "Delete & Start Over" recovery action
-  // works when a resume fails processing — otherwise the confirm dialog would
-  // never mount and the delete request would never be sent.
+  // Delete-related dialogs, shared by the failed-processing error branch and the
+  // main viewer branch so the "Delete & Start Over" recovery action works in the
+  // error state. Previously these lived only in the main branch, so on the error
+  // path the confirm dialog never mounted and the delete request was never sent.
+  // (The loading branch omits them — it has no delete affordance.)
   const deleteDialogs = (
     <>
       <ConfirmDialog
